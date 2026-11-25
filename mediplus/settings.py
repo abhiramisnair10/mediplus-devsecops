@@ -118,7 +118,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = (str(BASE_DIR.joinpath('static')),) 
-STATICFILES_DIRS=[STATIC_URL]
+STATICFILES_DIRS=[BASE_DIR / 'static']
 
 
 

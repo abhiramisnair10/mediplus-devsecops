@@ -24,6 +24,9 @@ from django.conf import settings
 from .import views
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('', views.index, name='root'),
+
     path('', include('admin_app.urls')),
     path('', include('user_app.urls')),
 
