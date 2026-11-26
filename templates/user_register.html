@@ -10,7 +10,7 @@
                         <div class="contact-us-form">
                             <h2>Sign up?</h2>
                             <!-- Form -->
-                            <form class="form" method="POST" action="user_register" enctype="multipart/form-data">
+                            <form class="form" method="POST" action="{% url 'user_register' %}" enctype="multipart/form-data">
                                {% csrf_token %}
                                 <div class="row">
                                     <div class="col-lg-6">

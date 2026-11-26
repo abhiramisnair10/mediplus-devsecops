@@ -28,9 +28,29 @@ def user_register(request):
       userpassword=request.POST.get("userpassword")
       data=user_details(userphoto=userphoto ,username=username,useremail=useremail,userphone=userphone,userpassword=userpassword)
       data.save()
-      return redirect(login) 
+      return redirect('login') 
     return render(request,'user_register.html')
 
+def login(request):
+    if request.method == "POST":
+        useremail = request.POST.get("useremail")
+        userpassword = request.POST.get("userpassword")
+
+        try:
+            user = user_details.objects.get(
+                useremail=useremail,
+                userpassword=userpassword
+            )
+
+            request.session['uid'] = user.pk
+            return redirect('home')
+
+        except user_details.DoesNotExist:
+            return render(request, 'login.html', {
+                'error': 'Invalid email or password'
+            })
+
+    return render(request, 'login.html')
 
 
 
@@ -44,6 +64,8 @@ def logout(request):
           del request.session[key]
    return redirect(index)
 
+def login(request):
+    return render(request, 'login.html')
    
   
 

@@ -18,28 +18,16 @@ from django.contrib import admin
 from django.urls import path,include
 
 from django.conf.urls.static import static
-from django.conf import settings
+from django.urls import path
+from . import views
 
-
-from .import views
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
+    path('home', views.home, name='home'),
+    path('services', views.services, name='services'),
+    path('contact', views.contact, name='contact'),
+    path('user_register', views.user_register, name='user_register'),
+    path('login/', views.login, name='login'),
+]  
 
-    path('', views.index, name='root'),
-
-    path('', include('admin_app.urls')),
-    path('', include('user_app.urls')),
-
-    path('index',views.index),
-
-    path('home',views.home),
-    path('services',views.services),
-    path('contact',views.contact),
-       
-    path('logout',views.logout),
-
-    path('user_register',views.user_register),
-  
-
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  

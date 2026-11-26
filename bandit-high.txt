@@ -1,0 +1,312 @@
+Run started:2026-11-25 18:25:52.981164+00:00
+
+Test results:
+>> Issue: [B613:trojansource] A Python source file contains bidirectional control characters ('\u202e').
+   Severity: High   Confidence: Medium
+   CWE: CWE-838 (https://cwe.mitre.org/data/definitions/838.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b613_trojansource.html
+   Location: .\venv\Lib\site-packages\bandit\plugins\trojansource.py:22:36
+21	     3  	access_level = "user"
+22	     4	    if access_level != 'none‮⁦': # Check if admin ⁩⁦' and access_level != 'user
+23	     5	        print("You are an admin.\n")
+
+--------------------------------------------------
+>> Issue: [B411:blacklist] Using xmlrpc to parse untrusted XML data is known to be vulnerable to XML attacks. Use defusedxml.xmlrpc.monkey_patch() function to monkey-patch xmlrpclib and mitigate XML vulnerabilities.
+   Severity: High   Confidence: High
+   CWE: CWE-20 (https://cwe.mitre.org/data/definitions/20.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b411-import-xmlrpclib
+   Location: .\venv\Lib\site-packages\defusedxml\__init__.py:37:4
+36	    from . import expatreader
+37	    from . import xmlrpc
+38	
+
+--------------------------------------------------
+>> Issue: [B411:blacklist] Using ExpatParser to parse untrusted XML data is known to be vulnerable to XML attacks. Use defusedxml.xmlrpc.monkey_patch() function to monkey-patch xmlrpclib and mitigate XML vulnerabilities.
+   Severity: High   Confidence: High
+   CWE: CWE-20 (https://cwe.mitre.org/data/definitions/20.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b411-import-xmlrpclib
+   Location: .\venv\Lib\site-packages\defusedxml\xmlrpc.py:18:4
+17	    __origin__ = "xmlrpc.client"
+18	    from xmlrpc.client import ExpatParser
+19	    from xmlrpc import client as xmlrpc_client
+
+--------------------------------------------------
+>> Issue: [B411:blacklist] Using client to parse untrusted XML data is known to be vulnerable to XML attacks. Use defusedxml.xmlrpc.monkey_patch() function to monkey-patch xmlrpclib and mitigate XML vulnerabilities.
+   Severity: High   Confidence: High
+   CWE: CWE-20 (https://cwe.mitre.org/data/definitions/20.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b411-import-xmlrpclib
+   Location: .\venv\Lib\site-packages\defusedxml\xmlrpc.py:19:4
+18	    from xmlrpc.client import ExpatParser
+19	    from xmlrpc import client as xmlrpc_client
+20	    from xmlrpc import server as xmlrpc_server
+
+--------------------------------------------------
+>> Issue: [B411:blacklist] Using server to parse untrusted XML data is known to be vulnerable to XML attacks. Use defusedxml.xmlrpc.monkey_patch() function to monkey-patch xmlrpclib and mitigate XML vulnerabilities.
+   Severity: High   Confidence: High
+   CWE: CWE-20 (https://cwe.mitre.org/data/definitions/20.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b411-import-xmlrpclib
+   Location: .\venv\Lib\site-packages\defusedxml\xmlrpc.py:20:4
+19	    from xmlrpc import client as xmlrpc_client
+20	    from xmlrpc import server as xmlrpc_server
+21	    from xmlrpc.client import gzip_decode as _orig_gzip_decode
+
+--------------------------------------------------
+>> Issue: [B411:blacklist] Using gzip_decode to parse untrusted XML data is known to be vulnerable to XML attacks. Use defusedxml.xmlrpc.monkey_patch() function to monkey-patch xmlrpclib and mitigate XML vulnerabilities.
+   Severity: High   Confidence: High
+   CWE: CWE-20 (https://cwe.mitre.org/data/definitions/20.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b411-import-xmlrpclib
+   Location: .\venv\Lib\site-packages\defusedxml\xmlrpc.py:21:4
+20	    from xmlrpc import server as xmlrpc_server
+21	    from xmlrpc.client import gzip_decode as _orig_gzip_decode
+22	    from xmlrpc.client import GzipDecodedResponse as _OrigGzipDecodedResponse
+
+--------------------------------------------------
+>> Issue: [B411:blacklist] Using GzipDecodedResponse to parse untrusted XML data is known to be vulnerable to XML attacks. Use defusedxml.xmlrpc.monkey_patch() function to monkey-patch xmlrpclib and mitigate XML vulnerabilities.
+   Severity: High   Confidence: High
+   CWE: CWE-20 (https://cwe.mitre.org/data/definitions/20.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b411-import-xmlrpclib
+   Location: .\venv\Lib\site-packages\defusedxml\xmlrpc.py:22:4
+21	    from xmlrpc.client import gzip_decode as _orig_gzip_decode
+22	    from xmlrpc.client import GzipDecodedResponse as _OrigGzipDecodedResponse
+23	else:
+
+--------------------------------------------------
+>> Issue: [B411:blacklist] Using ExpatParser to parse untrusted XML data is known to be vulnerable to XML attacks. Use defusedxml.xmlrpc.monkey_patch() function to monkey-patch xmlrpclib and mitigate XML vulnerabilities.
+   Severity: High   Confidence: High
+   CWE: CWE-20 (https://cwe.mitre.org/data/definitions/20.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b411-import-xmlrpclib
+   Location: .\venv\Lib\site-packages\defusedxml\xmlrpc.py:25:4
+24	    __origin__ = "xmlrpclib"
+25	    from xmlrpclib import ExpatParser
+26	    import xmlrpclib as xmlrpc_client
+
+--------------------------------------------------
+>> Issue: [B411:blacklist] Using xmlrpclib to parse untrusted XML data is known to be vulnerable to XML attacks. Use defusedxml.xmlrpc.monkey_patch() function to monkey-patch xmlrpclib and mitigate XML vulnerabilities.
+   Severity: High   Confidence: High
+   CWE: CWE-20 (https://cwe.mitre.org/data/definitions/20.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b411-import-xmlrpclib
+   Location: .\venv\Lib\site-packages\defusedxml\xmlrpc.py:26:4
+25	    from xmlrpclib import ExpatParser
+26	    import xmlrpclib as xmlrpc_client
+27	
+
+--------------------------------------------------
+>> Issue: [B411:blacklist] Using gzip_decode to parse untrusted XML data is known to be vulnerable to XML attacks. Use defusedxml.xmlrpc.monkey_patch() function to monkey-patch xmlrpclib and mitigate XML vulnerabilities.
+   Severity: High   Confidence: High
+   CWE: CWE-20 (https://cwe.mitre.org/data/definitions/20.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b411-import-xmlrpclib
+   Location: .\venv\Lib\site-packages\defusedxml\xmlrpc.py:29:4
+28	    xmlrpc_server = None
+29	    from xmlrpclib import gzip_decode as _orig_gzip_decode
+30	    from xmlrpclib import GzipDecodedResponse as _OrigGzipDecodedResponse
+
+--------------------------------------------------
+>> Issue: [B411:blacklist] Using GzipDecodedResponse to parse untrusted XML data is known to be vulnerable to XML attacks. Use defusedxml.xmlrpc.monkey_patch() function to monkey-patch xmlrpclib and mitigate XML vulnerabilities.
+   Severity: High   Confidence: High
+   CWE: CWE-20 (https://cwe.mitre.org/data/definitions/20.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b411-import-xmlrpclib
+   Location: .\venv\Lib\site-packages\defusedxml\xmlrpc.py:30:4
+29	    from xmlrpclib import gzip_decode as _orig_gzip_decode
+30	    from xmlrpclib import GzipDecodedResponse as _OrigGzipDecodedResponse
+31	
+
+--------------------------------------------------
+>> Issue: [B613:trojansource] A Python source file contains bidirectional control characters ('\u200f').
+   Severity: High   Confidence: Medium
+   CWE: CWE-838 (https://cwe.mitre.org/data/definitions/838.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b613_trojansource.html
+   Location: .\venv\Lib\site-packages\django\conf\locale\ar\formats.py:10:23
+9	MONTH_DAY_FORMAT = "j F"
+10	SHORT_DATE_FORMAT = "d‏/m‏/Y"
+11	# SHORT_DATETIME_FORMAT =
+
+--------------------------------------------------
+>> Issue: [B613:trojansource] A Python source file contains bidirectional control characters ('\u200f').
+   Severity: High   Confidence: Medium
+   CWE: CWE-838 (https://cwe.mitre.org/data/definitions/838.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b613_trojansource.html
+   Location: .\venv\Lib\site-packages\django\conf\locale\ckb\formats.py:11:32
+10	SHORT_DATE_FORMAT = "Y/n/j"
+11	SHORT_DATETIME_FORMAT = "Y/n/j،‏ G:i"
+12	FIRST_DAY_OF_WEEK = 6
+
+--------------------------------------------------
+>> Issue: [B613:trojansource] A Python source file contains bidirectional control characters ('\u200f').
+   Severity: High   Confidence: Medium
+   CWE: CWE-838 (https://cwe.mitre.org/data/definitions/838.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b613_trojansource.html
+   Location: .\venv\Lib\site-packages\django\conf\locale\fa\formats.py:11:32
+10	SHORT_DATE_FORMAT = "Y/n/j"
+11	SHORT_DATETIME_FORMAT = "Y/n/j،‏ G:i"
+12	FIRST_DAY_OF_WEEK = 6
+
+--------------------------------------------------
+>> Issue: [B324:hashlib] Use of weak MD5 hash for security. Consider usedforsecurity=False
+   Severity: High   Confidence: High
+   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b324_hashlib.html
+   Location: .\venv\Lib\site-packages\django\contrib\auth\hashers.py:658:15
+657	        self._check_encode_args(password, salt)
+658	        hash = hashlib.md5((salt + password).encode()).hexdigest()
+659	        return "%s$%s$%s" % (self.algorithm, salt, hash)
+
+--------------------------------------------------
+>> Issue: [B324:hashlib] Use of weak MD5 hash for security. Consider usedforsecurity=False
+   Severity: High   Confidence: High
+   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b324_hashlib.html
+   Location: .\venv\Lib\site-packages\django\db\backends\sqlite3\_functions.py:401:11
+400	        return None
+401	    return md5(text.encode()).hexdigest()
+402	
+
+--------------------------------------------------
+>> Issue: [B324:hashlib] Use of weak SHA1 hash for security. Consider usedforsecurity=False
+   Severity: High   Confidence: High
+   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b324_hashlib.html
+   Location: .\venv\Lib\site-packages\django\db\backends\sqlite3\_functions.py:447:11
+446	        return None
+447	    return sha1(text.encode()).hexdigest()
+448	
+
+--------------------------------------------------
+>> Issue: [B324:hashlib] Use of weak SHA1 hash for security. Consider usedforsecurity=False
+   Severity: High   Confidence: High
+   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b324_hashlib.html
+   Location: .\venv\Lib\site-packages\django\template\loaders\cached.py:96:15
+95	    def generate_hash(self, values):
+96	        return hashlib.sha1("|".join(values).encode()).hexdigest()
+97	
+
+--------------------------------------------------
+>> Issue: [B602:subprocess_popen_with_shell_equals_true] subprocess call with shell=True identified, security issue.
+   Severity: High   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b602_subprocess_popen_with_shell_equals_true.html
+   Location: .\venv\Lib\site-packages\pip\_internal\commands\configuration.py:269:12
+268	        try:
+269	            subprocess.check_call(f'{editor} "{fname}"', shell=True)
+270	        except FileNotFoundError as e:
+
+--------------------------------------------------
+>> Issue: [B411:blacklist] Using xmlrpc.client to parse untrusted XML data is known to be vulnerable to XML attacks. Use defusedxml.xmlrpc.monkey_patch() function to monkey-patch xmlrpclib and mitigate XML vulnerabilities.
+   Severity: High   Confidence: High
+   CWE: CWE-20 (https://cwe.mitre.org/data/definitions/20.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b411-import-xmlrpclib
+   Location: .\venv\Lib\site-packages\pip\_internal\commands\search.py:7:0
+6	import textwrap
+7	import xmlrpc.client
+8	from collections import OrderedDict
+
+--------------------------------------------------
+>> Issue: [B411:blacklist] Using xmlrpc.client to parse untrusted XML data is known to be vulnerable to XML attacks. Use defusedxml.xmlrpc.monkey_patch() function to monkey-patch xmlrpclib and mitigate XML vulnerabilities.
+   Severity: High   Confidence: High
+   CWE: CWE-20 (https://cwe.mitre.org/data/definitions/20.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b411-import-xmlrpclib
+   Location: .\venv\Lib\site-packages\pip\_internal\network\xmlrpc.py:5:0
+4	import urllib.parse
+5	import xmlrpc.client
+6	from typing import TYPE_CHECKING
+
+--------------------------------------------------
+>> Issue: [B411:blacklist] Using _HostType to parse untrusted XML data is known to be vulnerable to XML attacks. Use defusedxml.xmlrpc.monkey_patch() function to monkey-patch xmlrpclib and mitigate XML vulnerabilities.
+   Severity: High   Confidence: High
+   CWE: CWE-20 (https://cwe.mitre.org/data/definitions/20.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b411-import-xmlrpclib
+   Location: .\venv\Lib\site-packages\pip\_internal\network\xmlrpc.py:13:4
+12	if TYPE_CHECKING:
+13	    from xmlrpc.client import _HostType, _Marshallable
+14	
+
+--------------------------------------------------
+>> Issue: [B202:tarfile_unsafe_members] tarfile.extractall used without any validation. Please check and discard dangerous members.
+   Severity: High   Confidence: High
+   CWE: CWE-22 (https://cwe.mitre.org/data/definitions/22.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b202_tarfile_unsafe_members.html
+   Location: .\venv\Lib\site-packages\pip\_internal\utils\unpacking.py:256:12
+255	
+256	            tar.extractall(location, filter=pip_filter)
+257	
+
+--------------------------------------------------
+>> Issue: [B411:blacklist] Using xmlrpclib to parse untrusted XML data is known to be vulnerable to XML attacks. Use defusedxml.xmlrpc.monkey_patch() function to monkey-patch xmlrpclib and mitigate XML vulnerabilities.
+   Severity: High   Confidence: High
+   CWE: CWE-20 (https://cwe.mitre.org/data/definitions/20.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b411-import-xmlrpclib
+   Location: .\venv\Lib\site-packages\pip\_vendor\distlib\compat.py:41:4
+40	    import httplib
+41	    import xmlrpclib
+42	    import Queue as queue
+
+--------------------------------------------------
+>> Issue: [B411:blacklist] Using xmlrpc.client to parse untrusted XML data is known to be vulnerable to XML attacks. Use defusedxml.xmlrpc.monkey_patch() function to monkey-patch xmlrpclib and mitigate XML vulnerabilities.
+   Severity: High   Confidence: High
+   CWE: CWE-20 (https://cwe.mitre.org/data/definitions/20.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b411-import-xmlrpclib
+   Location: .\venv\Lib\site-packages\pip\_vendor\distlib\compat.py:77:4
+76	    import urllib.request as urllib2
+77	    import xmlrpc.client as xmlrpclib
+78	    import queue
+
+--------------------------------------------------
+>> Issue: [B202:tarfile_unsafe_members] tarfile.extractall used without any validation. Please check and discard dangerous members.
+   Severity: High   Confidence: High
+   CWE: CWE-22 (https://cwe.mitre.org/data/definitions/22.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b202_tarfile_unsafe_members.html
+   Location: .\venv\Lib\site-packages\pip\_vendor\distlib\util.py:1354:8
+1353	
+1354	        archive.extractall(dest_dir)
+1355	
+
+--------------------------------------------------
+>> Issue: [B202:tarfile_unsafe_members] tarfile.extractall used without any validation. Please check and discard dangerous members.
+   Severity: High   Confidence: High
+   CWE: CWE-22 (https://cwe.mitre.org/data/definitions/22.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b202_tarfile_unsafe_members.html
+   Location: .\venv\Lib\site-packages\pygments\lexers\_php_builtins.py:3304:16
+3303	            else:
+3304	                tar.extractall()
+3305	        yield from glob.glob(f"{PHP_MANUAL_DIR}{PHP_REFERENCE_GLOB}")
+
+--------------------------------------------------
+>> Issue: [B605:start_process_with_a_shell] Starting a process with a shell, possible injection detected, security issue.
+   Severity: High   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b605_start_process_with_a_shell.html
+   Location: .\venv\Lib\site-packages\setuptools\_distutils\command\bdist_rpm.py:369:14
+368	
+369	        out = os.popen(q_cmd)
+370	        try:
+
+--------------------------------------------------
+>> Issue: [B202:tarfile_unsafe_members] tarfile.extractall used without any validation. Please check and discard dangerous members.
+   Severity: High   Confidence: High
+   CWE: CWE-22 (https://cwe.mitre.org/data/definitions/22.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b202_tarfile_unsafe_members.html
+   Location: .\venv\Lib\site-packages\setuptools\_vendor\jaraco\context\__init__.py:80:12
+79	        with tarfile.open(fileobj=req, mode='r|*') as tf:
+80	            tf.extractall(path=target_dir, filter=_default_filter)
+81	        yield target_dir
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 625580
+	Total lines skipped (#nosec): 5
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 21
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 1489
+		Medium: 212
+		High: 29
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 15
+		Medium: 94
+		High: 1621
+Files skipped (1):
+	.\urls.py (syntax error while parsing AST from file)
