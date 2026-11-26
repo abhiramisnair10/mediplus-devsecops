@@ -24,17 +24,6 @@ stage('Python Dependency Installation') {
     }
 }
        
-stage('Dependency Scan - pip-audit') {
-    steps {
-        sh '''
-            docker run --rm \
-              -v /workspace/mediplus-CI-CD:/app \
-              -w /app \
-              python:3.11-slim \
-              sh -c "pip install -r requirements.txt pip-audit && pip-audit"
-        '''
-    }
-}
 
         stage('SAST - SonarQube') {
             steps {
@@ -45,7 +34,18 @@ stage('Dependency Scan - pip-audit') {
         stage('DAST - OWASP ZAP') {
             steps {
                 echo 'OWASP ZAP integration pending'
-            }
+
+         stage('Dependency Scan - pip-audit') {
+    steps {
+        sh '''
+            docker run --rm \
+            -v jenkins_home:/data \
+            -w /data/workspace/mediplus-CI-CD \
+            python:3.11-slim \
+            sh -c "pip install -r requirements.txt pip-audit && pip-audit"
+        '''
+    }
+}   }
         }
 
         stage('Docker Build') {
