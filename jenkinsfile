@@ -1,6 +1,11 @@
-
+```groovy
 pipeline {
     agent any
+
+    environment {
+        PROJECT_DIR = '/workspace/mediplus-CI-CD'
+        DOCKER_IMAGE = 'mediplus-app'
+    }
 
     stages {
 
@@ -11,59 +16,95 @@ pipeline {
             }
         }
 
-      
-stage('Python Dependency Installation') {
+        stage('Prepare Shared Workspace') {
+            steps {
+                sh '''
+                    mkdir -p ${PROJECT_DIR}
+                    cp -a "$WORKSPACE/." "${PROJECT_DIR}/"
+                '''
+            }
+        }
+
+        stage('Python Dependency Installation') {
+            steps {
+                sh '''
+                    docker run --rm \
+                    -v jenkins_home:/data \
+                    -w /data/workspace/mediplus-CI-CD \
+                    python:3.11-slim \
+                    pip install -r requirements.txt
+                '''
+            }
+        }
+
+        
+stage('Dependency Scan - pip-audit') {
     steps {
         sh '''
             docker run --rm \
             -v jenkins_home:/data \
             -w /data/workspace/mediplus-CI-CD \
             python:3.11-slim \
-            pip install -r requirements.txt
+            sh -c "pip install --upgrade pip setuptools && pip install -r requirements.txt pip-audit && pip-audit"
         '''
     }
 }
-       
-
         stage('SAST - SonarQube') {
             steps {
-                echo 'SonarQube integration pending'
+                echo 'Running SonarQube static code analysis'
+
+                sh '''
+                    docker run --rm \
+                    -v jenkins_home:/data \
+                    -w /data/workspace/mediplus-CI-CD \
+                    sonarsource/sonar-scanner-cli \
+                    sonar-scanner
+                '''
             }
         }
 
         stage('DAST - OWASP ZAP') {
             steps {
-                echo 'OWASP ZAP integration pending'
+                echo 'Running OWASP ZAP security scan'
 
-         stage('Dependency Scan - pip-audit') {
-    steps {
-        sh '''
-            docker run --rm \
-            -v jenkins_home:/data \
-            -w /data/workspace/mediplus-CI-CD \
-            python:3.11-slim \
-            sh -c "pip install -r requirements.txt pip-audit && pip-audit"
-        '''
-    }
-}   }
+                sh '''
+                    docker run --rm \
+                    -v jenkins_home:/data \
+                    -t \
+                    ghcr.io/zaproxy/zaproxy:stable \
+                    zap-baseline.py \
+                    -t http://host.docker.internal:8000 \
+                    -r zap-report.html
+                '''
+            }
         }
 
         stage('Docker Build') {
             steps {
-                echo 'Building Mediplus application'
+                echo 'Building Mediplus Docker image'
 
-                sh 'docker build -t mediplus-app:latest .'
+                sh '''
+                    docker build \
+                    -t ${DOCKER_IMAGE} \
+                    -f ${PROJECT_DIR}/Dockerfile \
+                    ${PROJECT_DIR}
+                '''
             }
         }
     }
 
     post {
         success {
-            echo 'Mediplus pipeline completed successfully!'
+            echo 'Mediplus CI/CD Pipeline completed successfully!'
         }
 
         failure {
             echo 'Pipeline failed. Check Console Output.'
         }
+
+        always {
+            echo 'CI/CD Pipeline execution finished.'
+        }
     }
 }
+```
