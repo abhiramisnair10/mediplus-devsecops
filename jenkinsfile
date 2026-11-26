@@ -12,15 +12,6 @@ pipeline {
         }
 
       
-stage('Prepare Shared Workspace') {
-    steps {
-        sh '''
-            mkdir -p /workspace/mediplus-CI-CD
-            cp -a "$WORKSPACE"/. /workspace/mediplus-CI-CD/
-        '''
-    }
-}
-
 stage('Python Dependency Installation') {
     steps {
         sh '''
