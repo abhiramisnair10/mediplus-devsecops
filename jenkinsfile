@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -5,43 +6,56 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                echo 'Checking out Mediplus source code'
+                echo 'Checking out Mediplus from GitHub'
                 checkout scm
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Python Dependency Installation') {
             steps {
-                echo 'Installing Python dependencies'
-                sh 'python3 -m pip install -r requirements.txt'
+                echo 'Installing Mediplus dependencies'
+
+                sh '''
+                docker run --rm \
+                  -v "$WORKSPACE:/app" \
+                  -w /app \
+                  python:3.11-slim \
+                  sh -c "pip install -r requirements.txt"
+                '''
             }
         }
 
         stage('Dependency Scan - pip-audit') {
             steps {
-                echo 'Running dependency security scan'
-                sh 'python3 -m pip install pip-audit'
-                sh 'pip-audit'
+                echo 'Scanning Python dependencies'
+
+                sh '''
+                docker run --rm \
+                  -v "$WORKSPACE:/app" \
+                  -w /app \
+                  python:3.11-slim \
+                  sh -c "pip install -r requirements.txt pip-audit && pip-audit"
+                '''
             }
         }
 
         stage('SAST - SonarQube') {
             steps {
-                echo 'Running SonarQube analysis'
-                echo 'SonarQube integration will be configured next'
+                echo 'SonarQube integration pending'
             }
         }
 
         stage('DAST - OWASP ZAP') {
             steps {
-                echo 'OWASP ZAP integration will be configured next'
+                echo 'OWASP ZAP integration pending'
             }
         }
 
         stage('Docker Build') {
             steps {
-                echo 'Building Mediplus Docker image'
-                sh 'docker build -t mediplus-app:jenkins .'
+                echo 'Building Mediplus application'
+
+                sh 'docker build -t mediplus-app:latest .'
             }
         }
     }
@@ -52,7 +66,7 @@ pipeline {
         }
 
         failure {
-            echo 'Mediplus pipeline failed. Check the console output.'
+            echo 'Pipeline failed. Check Console Output.'
         }
     }
 }
