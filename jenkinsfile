@@ -33,19 +33,18 @@ stage('Python Dependency Installation') {
     }
 }
 
-        stage('Dependency Scan - pip-audit') {
-            steps {
-                echo 'Scanning Python dependencies'
-
-                sh '''
-                docker run --rm \
-                  -v "$WORKSPACE:/app" \
-                  -w /app \
-                  python:3.11-slim \
-                  sh -c "pip install -r requirements.txt pip-audit && pip-audit"
-                '''
-            }
-        }
+       
+stage('Dependency Scan - pip-audit') {
+    steps {
+        sh '''
+            docker run --rm \
+              -v /workspace/mediplus-CI-CD:/app \
+              -w /app \
+              python:3.11-slim \
+              sh -c "pip install -r requirements.txt pip-audit && pip-audit"
+        '''
+    }
+}
 
         stage('SAST - SonarQube') {
             steps {
