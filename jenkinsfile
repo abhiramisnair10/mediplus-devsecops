@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        PROJECT_DIR = '/workspace/mediplus-CI-CD'
+        PROJECT_DIR = '/data/workspace/mediplus-CI-CD'
         DOCKER_IMAGE = 'mediplus-app'
     }
 
@@ -16,40 +16,29 @@ pipeline {
             }
         }
 
-        stage('Prepare Shared Workspace') {
-            steps {
-                sh '''
-                    mkdir -p ${PROJECT_DIR}
-                    cp -a "$WORKSPACE/." "${PROJECT_DIR}/"
-                '''
-            }
-        }
-
         stage('Python Dependency Installation') {
             steps {
                 sh '''
                     docker run --rm \
                     -v jenkins_home:/data \
-                    -w /data/workspace/mediplus-CI-CD \
+                    -w ${PROJECT_DIR} \
                     python:3.11-slim \
-                    pip install -r requirements.txt
+                    sh -c "pip install --upgrade pip setuptools && pip install -r requirements.txt"
                 '''
             }
         }
 
-        
-
-stage('Dependency Scan - pip-audit') {
-    steps {
-        sh '''
-            docker run --rm \
-            -v jenkins_home:/data \
-            -w /data/workspace/mediplus-CI-CD \
-            python:3.11-slim \
-            sh -c "pip install --upgrade pip setuptools && pip install -r requirements.txt pip-audit && pip-audit"
-        '''
-    }
-}
+        stage('Dependency Scan - pip-audit') {
+            steps {
+                sh '''
+                    docker run --rm \
+                    -v jenkins_home:/data \
+                    -w ${PROJECT_DIR} \
+                    python:3.11-slim \
+                    sh -c "pip install --upgrade pip setuptools && pip install -r requirements.txt pip-audit && pip-audit"
+                '''
+            }
+        }
 
         stage('SAST - SonarQube') {
             steps {
@@ -58,7 +47,7 @@ stage('Dependency Scan - pip-audit') {
                 sh '''
                     docker run --rm \
                     -v jenkins_home:/data \
-                    -w /data/workspace/mediplus-CI-CD \
+                    -w ${PROJECT_DIR} \
                     sonarsource/sonar-scanner-cli \
                     sonar-scanner
                 '''
@@ -72,11 +61,10 @@ stage('Dependency Scan - pip-audit') {
                 sh '''
                     docker run --rm \
                     -v jenkins_home:/data \
-                    -t \
                     ghcr.io/zaproxy/zaproxy:stable \
                     zap-baseline.py \
                     -t http://host.docker.internal:8000 \
-                    -r zap-report.html
+                    -r /data/workspace/mediplus-CI-CD/zap-report.html
                 '''
             }
         }
@@ -109,4 +97,3 @@ stage('Dependency Scan - pip-audit') {
         }
     }
 }
-```
