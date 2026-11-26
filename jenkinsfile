@@ -38,6 +38,7 @@ pipeline {
         }
 
         
+
 stage('Dependency Scan - pip-audit') {
     steps {
         sh '''
@@ -49,6 +50,7 @@ stage('Dependency Scan - pip-audit') {
         '''
     }
 }
+
         stage('SAST - SonarQube') {
             steps {
                 echo 'Running SonarQube static code analysis'
