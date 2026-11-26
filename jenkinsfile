@@ -11,19 +11,27 @@ pipeline {
             }
         }
 
-        stage('Python Dependency Installation') {
-            steps {
-                echo 'Installing Mediplus dependencies'
+      
+stage('Prepare Shared Workspace') {
+    steps {
+        sh '''
+            mkdir -p /workspace/mediplus-CI-CD
+            cp -a "$WORKSPACE"/. /workspace/mediplus-CI-CD/
+        '''
+    }
+}
 
-                sh '''
-                docker run --rm \
-                  -v "$WORKSPACE:/app" \
-                  -w /app \
-                  python:3.11-slim \
-                  sh -c "pip install -r requirements.txt"
-                '''
-            }
-        }
+stage('Python Dependency Installation') {
+    steps {
+        sh '''
+            docker run --rm \
+              -v /workspace/mediplus-CI-CD:/app \
+              -w /app \
+              python:3.11-slim \
+              pip install -r requirements.txt
+        '''
+    }
+}
 
         stage('Dependency Scan - pip-audit') {
             steps {
