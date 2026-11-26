@@ -40,19 +40,27 @@ pipeline {
             }
         }
 
-        stage('SAST - SonarQube') {
-            steps {
-                echo 'Running SonarQube static code analysis'
+        
+stage('SAST - SonarQube') {
+    steps {
+        echo 'Running local SonarQube analysis'
 
-                sh '''
-                    docker run --rm \
-                    -v jenkins_home:/data \
-                    -w ${PROJECT_DIR} \
-                    sonarsource/sonar-scanner-cli \
-                    sonar-scanner
-                '''
-            }
+        withCredentials([string(
+            credentialsId: 'sonarqube-token',
+            variable: 'SONAR_TOKEN'
+        )]) {
+            sh '''
+                docker run --rm \
+                --add-host=host.docker.internal:host-gateway \
+                -e SONAR_TOKEN="$SONAR_TOKEN" \
+                -v jenkins_home:/data \
+                -w /data/workspace/mediplus-CI-CD \
+                sonarsource/sonar-scanner-cli \
+                sonar-scanner
+            '''
         }
+    }
+}
 
         stage('DAST - OWASP ZAP') {
             steps {
