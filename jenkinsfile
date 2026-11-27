@@ -75,7 +75,7 @@ stage('DAST - OWASP ZAP') {
                 -v jenkins_home:/zap/wrk \
                 ghcr.io/zaproxy/zaproxy:stable \
                 zap-baseline.py \
-                -t http://host.docker.internal:8000 \
+                -t http://host.docker.internal:8001 \
                 -r /zap/wrk/workspace/mediplus-CI-CD/zap-report.html
         '''
     }
