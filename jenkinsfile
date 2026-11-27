@@ -63,20 +63,23 @@ stage('SAST - SonarQube') {
         }
     }
 }
-        stage('DAST - OWASP ZAP') {
-            steps {
-                echo 'Running OWASP ZAP security scan'
+        
+stage('DAST - OWASP ZAP') {
+    steps {
+        echo 'Running OWASP ZAP security scan'
 
-                sh '''
-                    docker run --rm \
-                    -v jenkins_home:/data \
-                    ghcr.io/zaproxy/zaproxy:stable \
-                    zap-baseline.py \
-                    -t http://host.docker.internal:8000 \
-                    -r /data/workspace/mediplus-CI-CD/zap-report.html
-                '''
-            }
-        }
+        sh '''
+            docker run --rm \
+                --add-host=host.docker.internal:host-gateway \
+                -v jenkins_home:/data \
+                -v jenkins_home:/zap/wrk \
+                ghcr.io/zaproxy/zaproxy:stable \
+                zap-baseline.py \
+                -t http://host.docker.internal:8000 \
+                -r /zap/wrk/workspace/mediplus-CI-CD/zap-report.html
+        '''
+    }
+}
 
         stage('Docker Build') {
             steps {
