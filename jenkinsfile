@@ -52,7 +52,7 @@ pipeline {
                     test -f requirements.txt
 
                     docker run --rm \
-                    --memory=512m \
+                    --memory=256m \
                     --cpus=1 \
                     -v "$WORKSPACE:/app" \
                     -w /app \
@@ -76,7 +76,7 @@ pipeline {
                     set -e
 
                     docker run --rm \
-                    --memory=512m \
+                    --memory=256m \
                     --cpus=1 \
                     -v "$WORKSPACE:/app" \
                     -w /app \
@@ -108,7 +108,7 @@ pipeline {
                 ]) {
                     sh '''
                         docker run --rm \
-                        --memory=512m \
+                        --memory=256m \
                         --cpus=1 \
                         --add-host=host.docker.internal:host-gateway \
                         -e SONAR_HOST_URL="$SONAR_HOST_URL" \
@@ -135,7 +135,7 @@ pipeline {
                     set -e
 
                     docker run --rm \
-                    --memory=512m \
+                    --memory=256m \
                     --cpus=1 \
                     --add-host=host.docker.internal:host-gateway \
                     -v "$WORKSPACE:/zap/wrk/:rw" \
