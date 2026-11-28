@@ -14,7 +14,7 @@ pipeline {
         PYTHON_IMAGE = 'python:3.11-slim'
 
         // SonarQube configuration
-        SONAR_HOST_URL = 'http://host.docker.internal:9000'
+        SONAR_HOST_URL = 'http://172.31.40.249:9000'
         SONAR_PROJECT_KEY = 'mediplus'
 
         // Application running on EC2 host, port 8001
@@ -111,7 +111,7 @@ pipeline {
                         --memory=256m \
                         --cpus=1 \
                         --add-host=host.docker.internal:host-gateway \
-                        -e SONAR_HOST_URL="$SONAR_HOST_URL" \
+                        -e SONAR_HOST_URL="http://172.31.40.249:9000" \
                         -e SONAR_TOKEN="$SONAR_TOKEN" \
                         -v "$WORKSPACE:/usr/src" \
                         -w /usr/src \
